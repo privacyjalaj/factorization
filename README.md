@@ -31,8 +31,12 @@ approximate-DP for sensitivity-$1$ function.
 4. Running sum at time $t$ is computed by computing $S_t + L_t R(t) z$, where $L_t$ is the $t$-th row of $L$ and $R(t)$ is the $t \times t$ 
 principal submatrix of $R$.
 
-# How is the stream generated?
-The stream are generated using two different probability distribution depending on the use case.
+The factorization mechanism in Fichtenberger, Henzinger, and Upadhyay (https://arxiv.org/abs/2202.11205) first computes the evaluation of a function 
+$f$ on the first $T-1$ integers. The function $f$ is defined recursively: (i) $f(0)=1$, and (ii) $f(k) =  \left(\frac{2k-1}{2k} \right) f(k-1)$  for $k\geq 1$. 
+Then the lower-triangular matrices $L=R$ is constructed with their $(i,j)$-th entry being $f(i-j)$ for $i \geq j$ and $0$, otherwise.
+
+# How are the streams of updates generated?
+The streams are generated using two different probability distribution depending on the use case.
 
 ## Continual counting
 When performing the experiments for continual counting, we use Bernoulli distribution to generate the stream. A Bernoulli distribution $\mathsf{Ber}(p)$
