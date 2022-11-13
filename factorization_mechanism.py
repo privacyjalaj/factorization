@@ -31,6 +31,8 @@ def computePrivacy(epsilon, delta):
     '''
     assert epsilon < 1
     assert delta < 1
+    # The expression for computing the noise scaling to preserve privacy is from last line on page 263 of [DR14] 
+    # The link to the book is https://www.cis.upenn.edu/~aaroth/Papers/privacybook.pdf
     return (0.8888888 + 2 * math.log(1 / delta * math.sqrt(2 / math.pi))) ** (0.5) / epsilon
 
 
@@ -48,11 +50,14 @@ def matrixFactorization(repitition, streamlength, epsilon, delta):
     assert type(streamlength) == int
 
     error_factorization = np.zeros(streamlength + 1)
+    
+    # Compute the evaluation of the function f defined for the factorization mechanism on values {0, 1, ..., T-1}
     K = np.ones(streamlength)
     for i in range(streamlength):
         for j in range(i):
             K[i] *= (2 * j + 1) / (2 * (j + 1))
 
+    # Compute the full right matrix R whose (i,j)-th entry is K(i-j) for i>=j
     Rfull = np.identity(streamlength)
     for j in range(streamlength):
         for k in range(j):
@@ -60,14 +65,24 @@ def matrixFactorization(repitition, streamlength, epsilon, delta):
 
     for p in range(1, streamlength + 1):
         L = np.zeros(p)
+        
+        # Since L=R, the p-th row of L is just the p-th row of R
         for i in range(p):
             L[i] = Rfull[p - 1, i]
         gaussian_vector = np.zeros(p)
         R = Rfull[:p, :p]
+        
+        # Take repitition number of samples of Gaussian r.v. to get better confidence on the error
         for j in range(repitition):
             gaussian_vector += np.random.normal(0, 1, p)
+            
+        # Compute the vector z in the factorization mechanism.    
         noise_vector = np.dot(R, gaussian_vector)
+        
+        # Post-processing with the p-th row of L to get the right estimate
         error_factorization[p - 1] = np.dot(L, noise_vector)
+        
+        # Compute the absolute value of the mean of the error
         error_factorization[p - 1] = abs(error_factorization[p - 1]) * computePrivacy(epsilon, delta) / repitition
 
     return error_factorization
@@ -88,10 +103,18 @@ def binaryMechanism(repitition, streamlength, epsilon, delta):
 
     error_binary = np.zeros(streamlength + 1)
     for p in range(1, streamlength + 1):
+        
+        # Compute the number of bits that are equal to 1 in the binary repitition of current time, p
         bit_ones = countSetBits(p)
+        
+        # Run the algorithm repitition number of time to get a better confidence on the error
         for j in range(repitition):
+            
+            # Add noise scaled to the number of ones in the binary representation of p
             for k in range(bit_ones):
                 error_binary[p - 1] += np.random.normal(0, 1)
+        
+        # Compute the absolute error incurred due to the binary mechanism
         error_binary[p - 1] = abs(error_binary[p - 1]) * privacy_term * computePrivacy(epsilon, delta) / repitition
     return error_binary
 
@@ -116,8 +139,12 @@ def bernoulliStream(probability, streamlength):
     assert type(streamlength) == int
 
     stream = np.zeros(streamlength)
-    X = bernoulli(0.5)
+    X = bernoulli(probability)
+    
+    # Compute the streamlength bernoulli random variable with parameter "probability"
     stream = X.rvs(streamlength)
+    
+    # Count stores the running count
     count = np.zeros(streamlength + 1)
     count[0] = stream[0]
     for i in range(1, streamlength):
