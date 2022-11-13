@@ -32,8 +32,12 @@ approximate-DP for sensitivity-$1$ function.
 principal submatrix of $R$.
 
 The factorization mechanism in Fichtenberger, Henzinger, and Upadhyay (https://arxiv.org/abs/2202.11205) first computes the evaluation of a function 
-$f$ on the first $T-1$ integers. The function $f$ is defined recursively: (i) $f(0)=1$, and (ii) $f(k) =  \left(\frac{2k-1}{2k} \right) f(k-1)$  for $k\geq 1$. 
-Then the lower-triangular matrices $L=R$ is constructed with their $(i,j)$-th entry being $f(i-j)$ for $i \geq j$ and $0$, otherwise.
+$f$ on $\{0,1, \cdots, T-1\}$. 
+The function $f$ is then defined recursively: 
+- $f(0)=1$, and 
+- $f(k) =  \left(\frac{2k-1}{2k} \right) f(k-1)$  for $k\geq 1$. 
+
+Then the lower-triangular matrices (or factors) $L=R$ are constructed with their $(i,j)$-th entry being $f(i-j)$ for $i \geq j$ and $0$, otherwise.
 
 # How are the streams of updates generated?
 The streams are generated using two different probability distribution depending on the use case.
