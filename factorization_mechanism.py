@@ -184,6 +184,10 @@ streamlength = 2**16
 epsilon = 0.5
 delta = 1e-10
 
+# To store the average multiplicative gap between private estimates and real count
+gap_average_binary = np.zeros(8)
+gap_average_factor = np.zeros(8)
+
 # Execution of the algorithm with all zero stream
 prob = 0
 count = bernoulliStream(prob,streamlength)
@@ -228,6 +232,19 @@ plt.xlabel("$t$")
 plt.ylabel("Absolute additive error")
 plt.show()
 
+count_average = 0
+binary_average = 0
+factorization = 0 
+
+for i in range(streamlength):
+    count_average+= count[i]
+    binary_average+= binary_count[i]
+    factorization+= ourbound_count[i]
+
+gap_average_binary[1] = (binary_average)/count_average
+gap_average_factor[1] = (factorization)/count_average
+
+
 
 '''
 Execution of the algorithm with stream with every update set to 1 with probability
@@ -254,6 +271,19 @@ plt.legend()
 plt.xlabel("$t$")
 plt.ylabel("Absolute additive error")
 plt.show()
+
+count_average = 0
+binary_average = 0
+factorization = 0 
+
+for i in range(streamlength):
+    count_average+= count[i]
+    binary_average+= binary_count[i]
+    factorization+= ourbound_count[i]
+
+gap_average_binary[2] = (binary_average)/count_average
+gap_average_factor[2] = (factorization)/count_average
+
 
 
 '''
@@ -282,6 +312,19 @@ plt.xlabel("$t$")
 plt.ylabel("Absolute additive error")
 plt.show()
 
+count_average = 0
+binary_average = 0
+factorization = 0 
+
+for i in range(streamlength):
+    count_average+= count[i]
+    binary_average+= binary_count[i]
+    factorization+= ourbound_count[i]
+
+gap_average_binary[3] = (binary_average)/count_average
+gap_average_factor[3] = (factorization)/count_average
+
+
 
 '''
 Execution of the algorithm with stream with every update set to 1 with probability
@@ -308,6 +351,19 @@ plt.xlabel("$t$")
 plt.ylabel("Absolute additive error")
 plt.show()
 
+count_average = 0
+binary_average = 0
+factorization = 0 
+
+for i in range(streamlength):
+    count_average+= count[i]
+    binary_average+= binary_count[i]
+    factorization+= ourbound_count[i]
+
+gap_average_binary[4] = (binary_average)/count_average
+gap_average_factor[4] = (factorization)/count_average
+
+
 
 '''
 Execution of the algorithm with stream with every update set to 1 with probability
@@ -333,6 +389,19 @@ plt.legend()
 plt.xlabel("$t$")
 plt.ylabel("Absolute additive error")
 plt.show()
+
+count_average = 0
+binary_average = 0
+factorization = 0 
+
+for i in range(streamlength):
+    count_average+= count[i]
+    binary_average+= binary_count[i]
+    factorization+= ourbound_count[i]
+
+gap_average_binary[5] = (binary_average)/count_average
+gap_average_factor[5] = (factorization)/count_average
+
 
 
 '''
@@ -361,6 +430,19 @@ plt.xlabel("$t$")
 plt.ylabel("Absolute additive error")
 plt.show()
 
+count_average = 0
+binary_average = 0
+factorization = 0 
+
+for i in range(streamlength):
+    count_average+= count[i]
+    binary_average+= binary_count[i]
+    factorization+= ourbound_count[i]
+
+gap_average_binary[6] = (binary_average)/count_average
+gap_average_factor[6] = (factorization)/count_average
+
+
 
 '''
 Execution of the algorithm with stream with every update set to 1 with probability
@@ -386,6 +468,18 @@ plt.legend()
 plt.xlabel("$t$")
 plt.ylabel("Absolute additive error")
 plt.show()
+
+count_average = 0
+binary_average = 0
+factorization = 0 
+
+for i in range(streamlength):
+    count_average+= count[i]
+    binary_average+= binary_count[i]
+    factorization+= ourbound_count[i]
+
+gap_average_binary[7] = (binary_average)/count_average
+gap_average_factor[7] = (factorization)/count_average
 
 
 
