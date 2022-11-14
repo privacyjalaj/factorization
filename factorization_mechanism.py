@@ -503,6 +503,7 @@ https://numpy.org/doc/stable/reference/random/generated/numpy.random.zipf.html
  '''
 a = 2
 streamlength = 2048
+epsilon = 0.5
 s = np.random.zipf(a, 2048)
 
 from scipy.special import zeta  
