@@ -188,7 +188,7 @@ delta = 1e-10
 gap_average_binary = np.zeros(8)
 gap_average_factor = np.zeros(8)
 
-# Execution of the algorithm with all zero stream
+# Execution of the algorithm with all zero stream, or estimating the additive error of the two mechanisms
 prob = 0
 count = bernoulliStream(prob,streamlength)
 binary_count = count + binaryMechanism(repitition, streamlength, epsilon, delta)
@@ -232,6 +232,7 @@ plt.xlabel("$t$")
 plt.ylabel("Absolute additive error")
 plt.show()
 
+# Compute SNR metric for p=2e-4
 count_average = 0
 binary_average = 0
 factorization = 0 
@@ -272,6 +273,7 @@ plt.xlabel("$t$")
 plt.ylabel("Absolute additive error")
 plt.show()
 
+# Compute SNR metric for p=2e-5
 count_average = 0
 binary_average = 0
 factorization = 0 
@@ -312,6 +314,7 @@ plt.xlabel("$t$")
 plt.ylabel("Absolute additive error")
 plt.show()
 
+# Compute SNR metric for p=2e-6
 count_average = 0
 binary_average = 0
 factorization = 0 
@@ -351,6 +354,7 @@ plt.xlabel("$t$")
 plt.ylabel("Absolute additive error")
 plt.show()
 
+# Compute SNR metric for p=2e-7
 count_average = 0
 binary_average = 0
 factorization = 0 
@@ -390,6 +394,7 @@ plt.xlabel("$t$")
 plt.ylabel("Absolute additive error")
 plt.show()
 
+# Compute SNR metric for p=2e-8
 count_average = 0
 binary_average = 0
 factorization = 0 
@@ -430,6 +435,7 @@ plt.xlabel("$t$")
 plt.ylabel("Absolute additive error")
 plt.show()
 
+# Compute SNR metric for p=2e-9
 count_average = 0
 binary_average = 0
 factorization = 0 
@@ -469,6 +475,7 @@ plt.xlabel("$t$")
 plt.ylabel("Absolute additive error")
 plt.show()
 
+# Compute SNR metric for p=2e-10
 count_average = 0
 binary_average = 0
 factorization = 0 
@@ -481,7 +488,9 @@ for i in range(streamlength):
 gap_average_binary[7] = (binary_average)/count_average
 gap_average_factor[7] = (factorization)/count_average
 
-
+# Output the signal to noise ratio metric
+print(gap_average_binary)
+print(gap_average_factor)
 
 ######### Code running the continual histogram estimation using our mechanism and binary mechanism ##############
 
@@ -568,9 +577,21 @@ plt.xlabel("$t$")
 plt.ylabel("Absolute additive error")
 plt.show()
 
+# Compute SNR metric for computing frequency of top-1 statistics
 count = real_vector_max_running_count
 
 count_average = 0
 binary_average = 0
 factorization = 0 
 
+for i in range(streamlength):
+    count_average+= count[i]
+    binary_average+= binary_count[i]
+    factorization+= ourbound_count[i]
+
+gap_binary = (binary_average)/count_average
+gap_factor = (factorization)/count_average
+
+# Output the signal to noise ratio metric for top-1 statistics
+print(gap_binary)
+print(gap_factor)
