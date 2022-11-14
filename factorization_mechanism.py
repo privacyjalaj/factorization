@@ -492,21 +492,22 @@ Zipf law has support over integer {1, 2, ..., k}
 The following code is taken from 
 https://numpy.org/doc/stable/reference/random/generated/numpy.random.zipf.html
  '''
-a = 3.0
+a = 2
 streamlength = 2048
-s = np.random.zipf(a, streamlength)
+s = np.random.zipf(a, 2048)
 
-from scipy.special import zeta
+from scipy.special import zeta  
 count = np.bincount(s)
 k = np.arange(1, s.max() + 1)
 
-plt.bar(k, count[1:], alpha=0.5, label='sample count')
-plt.plot(k, streamlength*(k**-a)/zeta(a), 'k.-', alpha=0.5,
-         label='expected count')
-plt.semilogy()
+plt.bar(k, count[1:], alpha=1, label='sample count')
+#plt.plot(k, n*(k**-a)/zeta(a), 'k.-', alpha=0.5, label='expected count')   
+#plt.semilogy()
 plt.grid(alpha=0.2)
+plt.xlim(1,20)
+plt.ylim(0,1400)
 plt.legend()
-plt.title(f'Zipf sample, a={a}, size={streamlength}')
+plt.title(f'Zipf sample, a={a}, size=2048')
 plt.show()
 
 
@@ -533,6 +534,24 @@ for i in range(1,streamlength):
 binary_count = real_vector_max_running_count + binaryMechanism(repitition, streamlength, epsilon, delta)
 ourbound_count = real_vector_max_running_count + matrixFactorization(repitition, streamlength,epsilon,delta)
 
+count = real_vector_max_running_count
+
+count_average = 0
+binary_average = 0
+factorization = 0 
+
+for i in range(streamlength):
+    count_average+= count[i]
+    binary_average+= binary_count[i]
+    factorization+= ourbound_count[i]
+
+gap_binary = (binary_average)/count_average
+gap_factor = (factorization)/count_average
+
+
+print(gap_binary)
+print(gap_factor)
+
 
 '''
 Plots the estimate of the maximum frequency through our algorithm (factorization mechanism)
@@ -548,4 +567,10 @@ plt.legend()
 plt.xlabel("$t$")
 plt.ylabel("Absolute additive error")
 plt.show()
+
+count = real_vector_max_running_count
+
+count_average = 0
+binary_average = 0
+factorization = 0 
 
