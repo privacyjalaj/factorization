@@ -181,6 +181,7 @@ Run of the algorithms on all zero stream of length 2^16
 The privacy parameter is chosen to be epsilon = 0.5 and delta = 1e-10
 '''
 streamlength = 2**16
+
 epsilon = 0.5
 delta = 1e-10
 
@@ -242,8 +243,8 @@ for i in range(streamlength):
     binary_average+= binary_count[i]
     factorization+= ourbound_count[i]
 
-gap_average_binary[1] = (binary_average)/count_average
-gap_average_factor[1] = (factorization)/count_average
+gap_average_binary[1] = count_average/(binary_average-count_average)
+gap_average_factor[1] = count_average/(factorization-count_average)
 
 
 
@@ -283,8 +284,8 @@ for i in range(streamlength):
     binary_average+= binary_count[i]
     factorization+= ourbound_count[i]
 
-gap_average_binary[2] = (binary_average)/count_average
-gap_average_factor[2] = (factorization)/count_average
+gap_average_binary[2] = count_average/(binary_average-count_average)
+gap_average_factor[2] = count_average/(factorization-count_average)
 
 
 
@@ -324,8 +325,8 @@ for i in range(streamlength):
     binary_average+= binary_count[i]
     factorization+= ourbound_count[i]
 
-gap_average_binary[3] = (binary_average)/count_average
-gap_average_factor[3] = (factorization)/count_average
+gap_average_binary[3] = count_average/(binary_average-count_average)
+gap_average_factor[3] = count_average/(factorization-count_average)
 
 
 
@@ -364,8 +365,8 @@ for i in range(streamlength):
     binary_average+= binary_count[i]
     factorization+= ourbound_count[i]
 
-gap_average_binary[4] = (binary_average)/count_average
-gap_average_factor[4] = (factorization)/count_average
+gap_average_binary[4] = count_average/(binary_average-count_average)
+gap_average_factor[4] = count_average/(factorization-count_average)
 
 
 
@@ -404,8 +405,8 @@ for i in range(streamlength):
     binary_average+= binary_count[i]
     factorization+= ourbound_count[i]
 
-gap_average_binary[5] = (binary_average)/count_average
-gap_average_factor[5] = (factorization)/count_average
+gap_average_binary[5] = count_average/(binary_average-count_average)
+gap_average_factor[5] = count_average/(factorization-count_average)
 
 
 
@@ -445,8 +446,8 @@ for i in range(streamlength):
     binary_average+= binary_count[i]
     factorization+= ourbound_count[i]
 
-gap_average_binary[6] = (binary_average)/count_average
-gap_average_factor[6] = (factorization)/count_average
+gap_average_binary[6] = count_average/(binary_average-count_average)
+gap_average_factor[6] = count_average/(factorization-count_average)
 
 
 
@@ -485,8 +486,8 @@ for i in range(streamlength):
     binary_average+= binary_count[i]
     factorization+= ourbound_count[i]
 
-gap_average_binary[7] = (binary_average)/count_average
-gap_average_factor[7] = (factorization)/count_average
+gap_average_binary[7] = count_average/(binary_average-count_average)
+gap_average_factor[7] = count_average/(factorization-count_average)
 
 # Output the signal to noise ratio metric
 print(gap_average_binary)
@@ -555,8 +556,8 @@ for i in range(streamlength):
     binary_average+= binary_count[i]
     factorization+= ourbound_count[i]
 
-gap_binary = (binary_average)/count_average
-gap_factor = (factorization)/count_average
+gap_binary = count_average/(binary_average-count_average)
+gap_factor = count_average/(factorization-count_average)
 
 
 print(gap_binary)
@@ -590,8 +591,8 @@ for i in range(streamlength):
     binary_average+= binary_count[i]
     factorization+= ourbound_count[i]
 
-gap_binary = (binary_average)/count_average
-gap_factor = (factorization)/count_average
+gap_binary = count_average/(binary_average-count_average)
+gap_factor = count_average/(factorization-count_average)
 
 # Output the signal to noise ratio metric for top-1 statistics
 print(gap_binary)
