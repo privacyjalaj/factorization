@@ -204,7 +204,7 @@ plt.xlim(1,streamlength-1)
 plt.ticklabel_format(axis="x", style="sci", scilimits=(0,0))
 plt.legend()
 plt.xlabel("$t$")
-plt.ylabel("Absolute additive error")
+plt.ylabel("Count estimate")
 plt.show()
 
 
@@ -230,7 +230,7 @@ plt.xlim(1,streamlength-1)
 plt.ticklabel_format(axis="x", style="sci", scilimits=(0,0))
 plt.legend()
 plt.xlabel("$t$")
-plt.ylabel("Absolute additive error")
+plt.ylabel("Count estimate")
 plt.show()
 
 # Compute SNR metric for p=2e-4
@@ -271,7 +271,7 @@ plt.xlim(1,streamlength-1)
 plt.ticklabel_format(axis="x", style="sci", scilimits=(0,0))
 plt.legend()
 plt.xlabel("$t$")
-plt.ylabel("Absolute additive error")
+plt.ylabel("Count estimate")
 plt.show()
 
 # Compute SNR metric for p=2e-5
@@ -312,7 +312,7 @@ plt.xlim(1,streamlength-1)
 plt.ticklabel_format(axis="x", style="sci", scilimits=(0,0))
 plt.legend()
 plt.xlabel("$t$")
-plt.ylabel("Absolute additive error")
+plt.ylabel("Count estimate")
 plt.show()
 
 # Compute SNR metric for p=2e-6
@@ -352,7 +352,7 @@ plt.xlim(1,streamlength-1)
 plt.ticklabel_format(axis="x", style="sci", scilimits=(0,0))
 plt.legend()
 plt.xlabel("$t$")
-plt.ylabel("Absolute additive error")
+plt.ylabel("Count estimate")
 plt.show()
 
 # Compute SNR metric for p=2e-7
@@ -392,7 +392,7 @@ plt.xlim(1,streamlength-1)
 plt.ticklabel_format(axis="x", style="sci", scilimits=(0,0))
 plt.legend()
 plt.xlabel("$t$")
-plt.ylabel("Absolute additive error")
+plt.ylabel("Count estimater")
 plt.show()
 
 # Compute SNR metric for p=2e-8
@@ -433,7 +433,7 @@ plt.xlim(1,streamlength-1)
 plt.ticklabel_format(axis="x", style="sci", scilimits=(0,0))
 plt.legend()
 plt.xlabel("$t$")
-plt.ylabel("Absolute additive error")
+plt.ylabel("Count estimate")
 plt.show()
 
 # Compute SNR metric for p=2e-9
@@ -473,7 +473,7 @@ plt.xlim(1,streamlength-1)
 plt.ticklabel_format(axis="x", style="sci", scilimits=(0,0))
 plt.legend()
 plt.xlabel("$t$")
-plt.ylabel("Absolute additive error")
+plt.ylabel("Count estimate")
 plt.show()
 
 # Compute SNR metric for p=2e-10
