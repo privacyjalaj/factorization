@@ -185,7 +185,10 @@ streamlength = 2**16
 epsilon = 0.5
 delta = 1e-10
 
-# To store the average multiplicative gap between private estimates and real count
+# To store the average signal-to-noise ratio of the two algorithms
+# The ratio is (real value of #1 in the stream)/(private estimate - real value of #1 in the stream)
+# SNR tells us how well the two mechanism performs. If the SNR is less than one, it means that the 
+# noise superceeded the actual signal and the algorithm does not provide anything useful.
 gap_average_binary = np.zeros(8)
 gap_average_factor = np.zeros(8)
 
@@ -210,7 +213,8 @@ plt.show()
 
 '''
 Execution of the algorithm with stream with every update set to 1 with probability
-equal to 2^{-4}
+equal to 2^{-4}. This covers the relative dense case. In this case, we expect the 
+real count to be really high. As such the SNR is expected to be low.
 '''
 prob = 2**(-4)
 count = bernoulliStream(prob,streamlength)
@@ -250,7 +254,7 @@ gap_average_factor[1] = count_average/(factorization-count_average)
 
 '''
 Execution of the algorithm with stream with every update set to 1 with probability
-equal to 2^{-5}
+equal to 2^{-5}. We are increasing the sparsity by a factor of 2.
 '''
 prob = 2**(-5)
 count = bernoulliStream(prob,streamlength)
@@ -291,7 +295,7 @@ gap_average_factor[2] = count_average/(factorization-count_average)
 
 '''
 Execution of the algorithm with stream with every update set to 1 with probability
-equal to 2^{-6}
+equal to 2^{-6}. We are increasing the sparsity by a factor of 2.
 '''
 prob = 2**(-6)
 count = bernoulliStream(prob,streamlength)
@@ -332,7 +336,7 @@ gap_average_factor[3] = count_average/(factorization-count_average)
 
 '''
 Execution of the algorithm with stream with every update set to 1 with probability
-equal to 2^{-7}
+equal to 2^{-7}. We are increasing the sparsity by a factor of 2.
 '''
 prob = 2**(-7)
 count = bernoulliStream(prob,streamlength)
@@ -372,7 +376,7 @@ gap_average_factor[4] = count_average/(factorization-count_average)
 
 '''
 Execution of the algorithm with stream with every update set to 1 with probability
-equal to 2^{-8}
+equal to 2^{-8}. We are increasing the sparsity by a factor of 2.
 '''
 prob = 2**(-8)
 count = bernoulliStream(prob,streamlength)
@@ -412,7 +416,7 @@ gap_average_factor[5] = count_average/(factorization-count_average)
 
 '''
 Execution of the algorithm with stream with every update set to 1 with probability
-equal to 2^{-9}
+equal to 2^{-9}. We are increasing the sparsity by a factor of 2.
 '''
 
 prob = 2**(-9)
@@ -453,7 +457,7 @@ gap_average_factor[6] = count_average/(factorization-count_average)
 
 '''
 Execution of the algorithm with stream with every update set to 1 with probability
-equal to 2^{-10}
+equal to 2^{-10}. We are increasing the sparsity by a factor of 2.
 '''
 prob = 2**(-10)
 count = bernoulliStream(prob,streamlength)
