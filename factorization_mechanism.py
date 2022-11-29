@@ -52,12 +52,13 @@ def matrixFactorization(repitition, streamlength, epsilon, delta):
     error_factorization = np.zeros(streamlength + 1)
     
     # Compute the evaluation of the function f defined for the factorization mechanism on values {0, 1, ..., T-1}
+    # This can be alternatively computed using the recursive relation shown in the accompanying paper
     K = np.ones(streamlength)
     for i in range(streamlength):
         for j in range(i):
             K[i] *= (2 * j + 1) / (2 * (j + 1))
 
-    # Compute the full right matrix R whose (i,j)-th entry is K(i-j) for i>=j
+    # Compute the full right matrix R whose (i,j)-th entry is K(i-j) for i>=j and 0 otherwise
     Rfull = np.identity(streamlength)
     for j in range(streamlength):
         for k in range(j):
@@ -67,22 +68,28 @@ def matrixFactorization(repitition, streamlength, epsilon, delta):
         L = np.zeros(p)
         
         # Since L=R, the p-th row of L is just the p-th row of R
+        # In our computation, at time p, we only need the p-th row of L
         for i in range(p):
             L[i] = Rfull[p - 1, i]
+        
         gaussian_vector = np.zeros(p)
         R = Rfull[:p, :p]
         
         # Take repitition number of samples of Gaussian r.v. to get better confidence on the error
+        # Using the fact that the sum of Gaussian vector is a Gaussian vector with variance multiplied by the repitition
+        # And hence the inner product of sum of Gaussian vector with any vector is the same as the sum of inner product 
+        # of Gaussian vector with the vector
         for j in range(repitition):
             gaussian_vector += np.random.normal(0, 1, p)
             
-        # Compute the vector z in the factorization mechanism.    
+        # Compute the vector z in the factorization mechanism. This is the noise added to Rx for input vector x    
         noise_vector = np.dot(R, gaussian_vector)
         
         # Post-processing with the p-th row of L to get the right estimate
         error_factorization[p - 1] = np.dot(L, noise_vector)
         
         # Compute the absolute value of the mean of the error
+        # Uses the fact that L_p (R(p) x(p) + R(p) z) = sum_{i \leq p} x_i(p) + L_p R(p) z
         error_factorization[p - 1] = abs(error_factorization[p - 1]) * computePrivacy(epsilon, delta) / repitition
 
     return error_factorization
@@ -131,7 +138,7 @@ def bernoulliStream(probability, streamlength):
     '''
     :param probability: the probability with which an update is 1
     :param streamlength: the total number of updates
-    :return: a stream of binary values with bit set to one with probability given
+    :return: a stream of length streamlength consisting of binary values with bit set to one with probability given
     by parameter probability
     '''
     assert probability <= 1
